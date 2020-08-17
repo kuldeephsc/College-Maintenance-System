@@ -1,0 +1,82 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center alert alert-info">Hostel Maintenance</h1>
+    <hr>
+
+            {% if user.is_authenticated %}
+    <div class="row">
+        <div class="col-sm-4">
+
+            <h4 class="alert alert-info">Register Complaint</h4>
+            <table>
+            <form action=" " method="post">
+                {% csrf_token %}
+                {{repair}}
+                <tr>
+                    <td>
+                        <input type="submit" value="submit" class="btn btn-success">
+                    </td>
+                </tr>
+
+            </form>
+                </table>
+            <div>
+                <h3 class="alert alert-success">
+                    {% for message in messages %}
+                    {{message}}
+                    {% endfor %}
+                </h3>
+            </div>
+
+
+        </div>
+
+        <div class="col-sm-8" style="height:500px;width:400px;overflow:auto;">
+                <h4 class="text-center alert alert-info">Status of Complaints</h4>
+                {% if stu %}
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">userid</th>
+                          <th scope="col">hostel</th>
+                          <th scope="col">floor</th>
+                          <th scope="col">room</th>
+                          <th scope="col">appliances</th>
+                          <th scope="col">status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for st in stu reversed %}
+                <tr>
+                   <th scope="row>">{{st.id}}</th>
+                    <td>{{st.student_name}}</td>
+                    <td>{{st.userid}}</td>
+                    <td>{{st.hostel}}</td>
+                    <td>{{st.floor}}</td>
+                    <td>{{st.room}}</td>
+                    <td>{{st.appliances}}</td>
+                    <td>{{st.status}}</td>
+                </tr>
+
+              {% endfor %}
+              </tbody>
+            </table>
+            {% else %}
+            <h4 class="text-center alert alert-warning">No records</h4>
+            {% endif %}
+        </div>
+
+
+
+    </div>
+    {% else %}
+        <h4 class="text-center alert alert-danger">You have to login first</h4>
+        {% endif %}
+</div>
+
+
+{% endblock content %}

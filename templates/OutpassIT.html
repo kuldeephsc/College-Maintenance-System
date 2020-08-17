@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center alert alert-info">Information Technology</h1>
+    <div class="row">
+        {% if user.is_authenticated %}
+        <div class="col-sm-12">
+            <h4 class="text-center alert alert-info">Apply for leave</h4>
+            <table>
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                {{ITstudent}}
+                <tr>
+                    <td>
+                        <input class="btn btn-outline-success" type="submit" value="submit">
+                    </td>
+                </tr>
+            </form>
+            </table>
+            <h4 class="alert alert-success">
+            {% for message in messages %}
+            {{message}}
+            {% endfor %}
+                </h4>
+        </div>
+        <hr>
+        <div class="col-sm-12"  style="height:500px;width:400px;overflow:auto;">
+             <h4 class="text-center alert alert-info">Status of Leave</h4>
+                {% if itians %}
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">RollNo</th>
+                          <th scope="col">year</th>
+                          <th scope="col">branch</th>
+                          <th scope="col">Reason</th>
+                          <th scope="col">From</th>
+                          <th scope="col">To</th>
+                          <th scope="col">apply_date</th>
+                          <th scope="col">status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for it in itians reversed %}
+                <tr>
+                   <th scope="row>">{{it.id}}</th>
+                    <td>{{it.it_name}}</td>
+                    <td>{{it.it_rollnumber}}</td>
+                    <td>{{it.it_year}}</td>
+                    <td>{{it.it_branch}}</td>
+                    <td>{{it.it_reason}}</td>
+                    <td>{{it.it_start_date}}</td>
+                    <td>{{it.it_end_date}}</td>
+                    <td>{{it.it_applydate}}</td>
+                    <td>{{it.it_permission}}</td>
+                </tr>
+
+              {% endfor %}
+              </tbody>
+            </table>
+            {% else %}
+            <h4 class="text-center alert alert-warning">No records</h4>
+            {% endif %}
+        </div>
+        {% else %}
+        <h4 class="text-center alert alert-danger">You have to login first</h4>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

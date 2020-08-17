@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center alert alert-info">Mechanical Engineering</h1>
+    <div class="row">
+        {% if user.is_authenticated %}
+        <div class="col-sm-12">
+            <h4 class="text-center alert alert-info">Apply for leave</h4>
+            <table>
+                <form action="" method="post">
+                    {% csrf_token %}
+
+                {{EEform}}
+                <tr>
+                    <td>
+                        <input class="btn btn-outline-success" type="submit" value="submit">
+                    </td>
+                </tr>
+            </form>
+            </table>
+            <h4 class="alert alert-success">
+            {% for message in messages %}
+            {{message}}
+            {% endfor %}
+                </h4>
+        </div>
+        <hr>
+        <div class="col-sm-12"  style="height:500px;width:400px;overflow:auto;">
+             <h4 class="text-center alert alert-info">Status of Leave</h4>
+                {% if itians %}
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">RollNo</th>
+                          <th scope="col">year</th>
+                          <th scope="col">branch</th>
+                          <th scope="col">Reason</th>
+                          <th scope="col">From</th>
+                          <th scope="col">To</th>
+                          <th scope="col">apply_date</th>
+                          <th scope="col">status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for it in itians reversed %}
+                <tr>
+                   <th scope="row>">{{it.id}}</th>
+                    <td>{{it.ee_name}}</td>
+                    <td>{{it.ee_rollnumber}}</td>
+                    <td>{{it.ee_year}}</td>
+                    <td>{{it.ee_branch}}</td>
+                    <td>{{it.ee_reason}}</td>
+                    <td>{{it.ee_start_date}}</td>
+                    <td>{{it.ee_end_date}}</td>
+                    <td>{{it.ee_applydate}}</td>
+                    <td>{{it.ee_permission}}</td>
+                </tr>
+
+              {% endfor %}
+              </tbody>
+            </table>
+            {% else %}
+            <h4 class="text-center alert alert-warning">No records</h4>
+            {% endif %}
+        </div>
+        {% else %}
+        <h4 class="text-center alert alert-danger">You have to login first</h4>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock content %}

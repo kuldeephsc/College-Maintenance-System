@@ -1,0 +1,22 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <h1 class="text-center alert alert-info"> Student Outpass System</h1>
+    {% if user.is_authenticated %}
+    <h4 class="text-center alert alert-info">Select Your Department</h4>
+    <br>
+    <a  class="btn btn-outline-danger btn-lg btn-block" href="{% url 'outpassIT' %}" role="button">Information Technology</a>
+    <hr>
+    <br>
+    <a type="button" class="btn btn-outline-dark btn-lg btn-block" href="{% url 'OutpassME' %}" role="button">Mechanical Engineering</a>
+    <hr>
+    <br>
+    <a type="button" class="btn btn-outline-success btn-lg btn-block" href="{% url 'OutpassEE' %}"  role="button">Electrical Engineering</a>
+
+    {% else %}
+    <h4 class="text-center alert alert-danger">You have to login first</h4>
+    {% endif %}
+</div>
+
+{% endblock content %}

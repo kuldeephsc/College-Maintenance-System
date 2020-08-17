@@ -1,0 +1,73 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+
+      <br>
+    <h1 class="text-center alert alert-info">Lab Maintenance</h1>
+      <hr>
+    {% if user.is_authenticated %}
+    <div class="row">
+        <div class="col-sm-4">
+
+            <h4 class="alert alert-info">Register complaint</h4>
+              <form method="post">
+                  {% csrf_token %}
+                  <table>
+                      {{lab}}
+                      <tr>
+                          <td>
+                              <input type="submit" value="submit" class="btn btn-success">
+                          </td>
+                      </tr>
+
+                  </table>
+
+              </form>
+              {% for message in messages %}
+                  {{message}}
+                  {% endfor %}
+        </div>
+
+        <div class="col-sm-8" style="height:500px;width:400px;overflow:auto;">
+            <h4 class="text-center alert alert-info">Status of Complaint</h4>
+                {% if lbrs %}
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">Lab</th>
+                          <th scope="col">System</th>
+                          <th scope="col">Problem</th>
+                          <th scope="col">Status</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                {% for lbr in lbrs reversed %}
+                <tr>
+                   <th scope="row>">{{lbr.id}}</th>
+                    <td>{{lbr.lab}}</td>
+                    <td>{{lbr.system}}</td>
+                    <td>{{lbr.problem}}</td>
+                    <td>{{lbr.lab_status}}</td>
+
+                </tr>
+
+              {% endfor %}
+              </tbody>
+            </table>
+            {% else %}
+            <h4 class="text-center alert alert-warning">No records</h4>
+            {% endif %}
+        </div>
+
+
+    </div>
+     {% else %}
+    <h4 class="text-center alert alert-danger">You have to login first</h4>
+    {% endif %}
+</div>
+
+{% endblock content %}
+

@@ -1,0 +1,81 @@
+
+{% extends 'index.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <!--<div class="row">
+        <div class="col-sm-4">-->
+    <h1 class="text-center alert alert-info">Mess Feedback</h1>
+      <hr>
+  {% if user.is_authenticated %}
+
+    <h5 class="alert alert-danger">Please rate your food accurately, Because if you enter wrong data then it will be
+    difficult to analyse the food quality.</h5>
+    <hr>
+    <div class="row">
+        <div class="col-sm-4">
+            <h4 class="alert alert-info">Rate Mess Food</h4>
+            <form action=" " method="POST">
+            {% csrf_token %}
+                <table>
+                  {{messfood}}
+                  <tr>
+                      <td>
+                  <input type="submit" value="submit" class="btn btn-success">
+                      </td>
+                  </tr>
+                </table>
+            </form>
+            <div>
+                *If you try to give multiple ratings at a time or regularly in a same pattern then there can
+                be a strict action against you from the college administration side.<br>
+                So <b>{{user.first_name}}</b> be mature provdie the actual information here.
+            </div>
+
+
+            {% for message in messages %}
+                  {{message}}
+            {% endfor %}
+        </div>
+
+        <div class="col-sm-8" style="height:500px;width:400px;overflow:auto;">
+                <h4 class="text-center alert alert-info">Ratings and Reviews</h4>
+                {% if revs %}
+                <table class="table table-hover">
+                <thead>
+                    <tr>
+                          <th scope="col">ID</th>
+                          <th scope="col">meal</th>
+                          <th scope="col">rating</th>
+                          <th scope="col">date</th>
+                          <th scope="col">review</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                {% for rev in revs reversed %}
+                <tr>
+                   <th scope="row>">{{rev.id}}</th>
+                    <td>{{rev.meal}}</td>
+                    <td>{{rev.rating}}</td>
+                    <td>{{rev.feedback_date}}</td>
+                    <td>{{rev.review}}</td>
+
+                </tr>
+
+              {% endfor %}
+              </tbody>
+            </table>
+            {% else %}
+            <h4 class="text-center alert alert-warning">No records</h4>
+            {% endif %}
+        </div>
+        {% else %}
+              <br>
+              <h4 class="text-center alert alert-danger">You have to login first</h4>
+        {% endif %}
+    </div>
+</div>
+
+
+{% endblock content %}
