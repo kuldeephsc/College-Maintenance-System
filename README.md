@@ -8,4 +8,4 @@ Administration can see it and take action to resolve this.
 3-Lab Maintenance:- If a student find any problem in lab computers then he can raise issue and administration will resolve it.
 It will applicable for computer systems of academic blocks.
 4-Student Outpass:- Student can apply for leave online and administration can give permission for student.
-hosted on ;- https://www.chandreshmark41.pythonanywhere.com
+
